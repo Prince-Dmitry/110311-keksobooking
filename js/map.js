@@ -47,7 +47,6 @@ var FEATURES = [
   'conditioner'];
 
 var photos = [];
-var notices = [];
 
 // Нахождение случайного числа
 
@@ -61,17 +60,16 @@ var getRandom = function (startIndex, endIndex) {
 var getRandomArr = function (arr) {
   var spliceArr = [];
   var copyArr = arr.slice();
-  while (copyArr.length > 0) {
-    var RandomItem = getRandom(0, copyArr.length - 1);
-    var current = copyArr.splice(RandomItem, 1)[0];
-    spliceArr.push(current);
+  for (var i = copyArr.length - 1; i < 0; i--) {
+    spliceArr[i] = copyArr.splice(getRandom(0, copyArr.length), 1).join();
   }
-  return spliceArr;
+  return copyArr;
 };
 
 // Создание массива с данными по заданию
 
 var getNotice = function () {
+  var notices = [];
   var avatarArr = getRandomArr(AVATAR);
   var titleArr = getRandomArr(TITLES);
   var NUMBER = titleArr.length;
@@ -103,6 +101,7 @@ var getNotice = function () {
     };
     notices.push(notice);
   }
+  return notices;
 };
 getNotice();
 
@@ -175,9 +174,9 @@ var renderNoticeCard = function (notice) {
 var fragment = document.createDocumentFragment();
 var fragmentCard = document.createDocumentFragment();
 
-for (var i = 0; i < notices.length; i++) {
-  fragment.appendChild(renderNoticeBtn(notices[i]));
-  fragmentCard.appendChild(renderNoticeCard(notices[i]));
+for (var i = 0; i < getNotice.length; i++) {
+  fragment.appendChild(renderNoticeBtn(getNotice[i]));
+  fragmentCard.appendChild(renderNoticeCard(getNotice[i]));
 }
 
 similarListButtons.appendChild(fragment);
