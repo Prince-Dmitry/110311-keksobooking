@@ -1,3 +1,4 @@
+
 body {
     font-family: Roboto, Arial, sans-serif;
     font-size: 16px;
@@ -6,6 +7,7 @@ body {
     color: #353535;
     background-color: #f0f0ea;
 }
+
 
 h1 {
     font-size: 29px;
@@ -53,12 +55,10 @@ textarea {
     font-family: Roboto, sans-serif;
     font-size: 18px;
     line-height: 26px;
-
     box-sizing: border-box;
     width: 222px;
     height: 42px;
     padding-left: 14px;
-
     border: 1px solid #d9d9d3;
     border-radius: 4px;
     background-color: white;
@@ -67,6 +67,7 @@ textarea {
 input[type=text]:hover,
 input[type=number]:hover,
 select:hover,
+
 textarea:hover {
     border-color: #fa9;
 }
@@ -74,10 +75,12 @@ textarea:hover {
 input[type=text]:focus,
 input[type=number]:focus,
 select:focus,
+
 textarea:focus {
     outline: none;
     box-shadow: 0 0 4px 1px #ff6547;
 }
+
 
 .hidden {
     display: none;
@@ -227,10 +230,8 @@ textarea:focus {
 .map__pin--main {
     top: 375px;
     left: 50%;
-
     width: 65px;
     height: 65px;
-
     cursor: move;
 }
 
@@ -367,7 +368,7 @@ textarea:focus {
     border: 0;
     background: none;
 }
-
+  
 .popup__close:active {
     transform: translate(1px, 1px);
 }
@@ -419,7 +420,6 @@ textarea:focus {
     margin: 0 120px;
     padding: 30px 0;
 }
-
 .notice__title {
     font-size: 28px;
     font-weight: bold;
@@ -529,6 +529,7 @@ textarea:focus {
     min-height: 230px;
 }
 
+
 .notice__form input[type=file] {
     position: absolute;
     left: -900em;
@@ -578,6 +579,7 @@ textarea:focus {
     border: 0;
     background: none;
 }
+
 
 
 .footer {
@@ -651,3 +653,4 @@ textarea:focus {
 .footer-social-item-vk {
     background-position: -10px -10px;
 }
+
