@@ -96,13 +96,13 @@ var getRandomArr = function (count) {
 
 // Рандомный массив строк заголовков
 
-var generateTitelsArray = function (count) {
+var generateTitlesArray = function (count) {
   var arr = getRandomArr(count);
-  var arrTitels = [];
+  var arrTitles = [];
   for (var i = 0; i < count; i++) {
-    arrTitels[arr[i]] = TITLES[i];
+    arrTitles[arr[i]] = TITLES[i];
   }
-  return arrTitels;
+  return arrTitles;
 };
 
 //  Случайный массив строк случайной длины (features)
@@ -123,26 +123,26 @@ var getRandomFeatures = function () {
 //  Функция собирает объект mapPin
 //  mapPin - объект состоящий из 3-х других объектов (objAuthor, objOffer, objLocation)
 
-var getNotice = function (avatarNumber, offerTitel) {
+var getNotice = function (avatarNumber, offerTitle) {
   var objAuthor = {
-    avatar: 'img/avatars/user0' + avatarNumber.toString() + '.png'
+    'avatar': 'img/avatars/user0' + avatarNumber.toString() + '.png'
   };
   var objLocation = {
     x: getRandom(MAP_X_MIN, MAP_X_MAX),
     y: getRandom(MAP_Y_MIN, MAP_Y_MAX)
   };
   var objOffer = {
-    title: offerTitel,
-    address: objLocation.x + ', ' + objLocation.y,
-    price: getRandom(PRICE_MIN, PRICE_MAX),
-    type: TYPE[getRandom(0, TYPE.length)],
-    rooms: getRandom(OFFER_ROOM_MIN, OFFER_ROOM_MAX),
-    guests: getRandom(OFFER_GUESTS_MIN, OFFER_GUESTS_MAX),
-    checkin: CHECK[getRandom(0, CHECK.length)],
-    checkout: CHECK[getRandom(0, CHECK.length)],
-    features: getRandomFeatures(),
-    description: [],
-    photos: []
+    'title': offerTitle,
+    'address': objLocation.x + ', ' + objLocation.y,
+    'price': getRandom(PRICE_MIN, PRICE_MAX),
+    'type': TYPE[getRandom(0, TYPE.length)],
+    'rooms': getRandom(OFFER_ROOM_MIN, OFFER_ROOM_MAX),
+    'guests': getRandom(OFFER_GUESTS_MIN, OFFER_GUESTS_MAX),
+    'checkin': CHECK[getRandom(0, CHECK.length)],
+    'checkout': CHECK[getRandom(0, CHECK.length)],
+    'features': getRandomFeatures(),
+    'description': [],
+    'photos': []
   };
   var mapPin = {
     author: objAuthor,
@@ -157,11 +157,11 @@ var getNotice = function (avatarNumber, offerTitel) {
 
 var generateMapPins = function (count) {
   var avatarNumbers = getRandomArr(count);
-  var offerTitels = generateTitelsArray(count);
+  var offerTitles = generateTitlesArray(count);
   var arrayMapPins = [];
 
   for (var i = 0; i < count; i++) {
-    arrayMapPins[i] = getNotice(avatarNumbers[i] + 1, offerTitels[i]);
+    arrayMapPins[i] = getNotice(avatarNumbers[i] + 1, offerTitles[i]);
   }
   return arrayMapPins;
 };
