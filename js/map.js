@@ -74,7 +74,7 @@ var getRandomArr = function (count) {
 
 // Рандомный массив строк заголовков
 
-var generateTitelsArray = function (count) {
+var generateTitlesArray = function (count) {
   var arr = getRandomArr(count);
   var arrTitels = [];
   for (var i = 0; i < count; i++) {
@@ -101,7 +101,7 @@ var getRandomFeatures = function () {
 //  Функция собирает объект mapPin
 //  mapPin - объект состоящий из 3-х других объектов (objAuthor, objOffer, objLocation)
 
-var getNotice = function (avatarNumber, offerTitel) {
+var getNotice = function (avatarNumber, offerTitle) {
   var objAuthor = {
     'avatar': 'img/avatars/user0' + avatarNumber.toString() + '.png'
   };
@@ -110,7 +110,7 @@ var getNotice = function (avatarNumber, offerTitel) {
     y: getRandom(MAP_Y_MIN, MAP_Y_MAX)
   };
   var objOffer = {
-    'title': offerTitel,
+    'title': offerTitle,
     'address': objLocation.x + ', ' + objLocation.y,
     'price': getRandom(PRICE_MIN, PRICE_MAX),
     'type': TYPE[getRandom(0, TYPE.length)],
@@ -135,11 +135,11 @@ var getNotice = function (avatarNumber, offerTitel) {
 
 var generateMapPins = function (count) {
   var avatarNumbers = getRandomArr(count);
-  var offerTitels = generateTitelsArray(count);
+  var offerTitles = generateTitlesArray(count);
   var arrayMapPins = [];
 
   for (var i = 0; i < count; i++) {
-    arrayMapPins[i] = getNotice(avatarNumbers[i] + 1, offerTitels[i]);
+    arrayMapPins[i] = getNotice(avatarNumbers[i] + 1, offerTitles[i]);
   }
   return arrayMapPins;
 };
