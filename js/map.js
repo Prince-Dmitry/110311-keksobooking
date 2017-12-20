@@ -273,6 +273,12 @@ var enableNoticeForm = function () {
   }
 };
 
+var getDataIndex = function () {
+  for (var i = 1; i <= NUMBER; i++) {
+    noticeForm.classList.setAttribute('data-index') = i;
+  }
+
+}
 
 var diactivatePinBase = function (node) {
   var offerIndex;
@@ -280,7 +286,7 @@ var diactivatePinBase = function (node) {
   //  Индекс активной кнопки массива среди всех сгенерированных кнопок
 
   node.classList.remove('map__pin--active');
-  offerIndex = [].indexOf.call(mapGeneratedPins, node);
+  offerIndex = noticeForm.classList.getAttribute('data-index');
   hideNode(mapGeneratedCards[offerIndex]);
 };
 
