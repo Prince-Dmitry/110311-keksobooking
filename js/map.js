@@ -251,14 +251,6 @@ var createMapCards = function (arrayMapPins) {
   return divNode;
 };
 
-/*
-
-mapPins = generateMapPins(NUMBER);
-mapElement.classList.remove('map--faded');
-similarListButtons.appendChild(createMapPinsNode(mapPins));
-mapElement.insertBefore(createMapCards(mapPins), mapFilter);
-*/
-
 var disableNoticeForm = function () {
   for (var i = 0; i < noticeFormFieldsets.length; i++) {
     noticeFormFieldsets[i].disabled = true;
@@ -272,13 +264,13 @@ var enableNoticeForm = function () {
   }
 };
 
-var getDataIndex = function (howMany) {
-  for (var i = 1; i <= howMany; i++) {
-    noticeForm.classList.setAttribute('data-index', i);
+var getDataIndex = function () {
+  for (var i = 1; i <= NUMBER; i++) {
+    noticeForm.setAttribute('data-index', i);
   }
 };
 
-getDataIndex(NUMBER);
+getDataIndex();
 
 var diactivatePinBase = function (node) {
   var offerIndex;
@@ -286,7 +278,7 @@ var diactivatePinBase = function (node) {
   //  Индекс активной кнопки массива среди всех сгенерированных кнопок
 
   node.classList.remove('map__pin--active');
-  offerIndex = noticeForm.classList.getAttribute('data-index');
+  offerIndex = noticeForm.getAttribute('data-index');
   hideNode(mapGeneratedCards[offerIndex]);
 };
 
