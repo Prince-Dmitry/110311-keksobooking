@@ -273,13 +273,13 @@ var enableNoticeForm = function () {
   }
 };
 
-var getDataIndex = function () {
-  for (var i = 1; i <= NUMBER; i++) {
+var getDataIndex = function (howMany) {
+  for (var i = 1; i <= howMany; i++) {
     noticeForm.classList.setAttribute('data-index', i);
   }
 };
 
-getDataIndex();
+getDataIndex(NUMBER);
 
 var diactivatePinBase = function (node) {
   var offerIndex;
