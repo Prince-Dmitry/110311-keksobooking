@@ -48,10 +48,32 @@ var LABEL_WIDTH = 5;
 var LABEL_HEIGHT = 40;
 var NUMBER = 8;
 
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
+
 var mapPins;
 var mapElement = document.querySelector('.map');
 var similarListButtons = document.querySelector('.map .map__pins');
 var mapFilter = document.querySelector('.map .map__filters-container');
+
+var similarListButtonsMain = similarListButtons.querySelector('.map__pin--main');
+var mapGeneratedPins;
+var mapGeneratedCards;
+var mapCardsNode;
+
+var noticeForm = document.querySelector('.notice__form');
+var noticeFormFieldsets = noticeForm.querySelectorAll('fieldset');
+
+
+//  Переключатели видимости узла
+
+var hideNode = function (node) {
+  node.style.display = 'none';
+};
+
+var showNode = function (node) {
+  node.style.display = '';
+};
 
 var getRandom = function (startIndex, endIndex) {
   return Math.floor(Math.random() * (endIndex - (startIndex)) + startIndex);
@@ -230,7 +252,134 @@ var createMapCards = function (arrayMapPins) {
   return divNode;
 };
 
+/*
 mapPins = generateMapPins(NUMBER);
 mapElement.classList.remove('map--faded');
 similarListButtons.appendChild(createMapPinsNode(mapPins));
 mapElement.insertBefore(createMapCards(mapPins), mapFilter);
+*/
+
+var disableNoticeForm = function () {
+  for (var i = 0; i < noticeFormFieldsets.length; i++) {
+    noticeFormFieldsets[i].disabled = true;
+  }
+};
+
+var enableNoticeForm = function () {
+  noticeForm.classList.remove('notice__form--disabled');
+  for (var i = 0; i < noticeFormFieldsets.length; i++) {
+    noticeFormFieldsets[i].disabled = false;
+  }
+};
+
+var getDataIndex = function (howMany) {
+  for (var i = 1; i <= howMany; i++) {
+    noticeForm.classList.setAttribute('data-index', i);
+  }
+};
+
+getDataIndex(NUMBER);
+
+var diactivatePinBase = function (node) {
+  var offerIndex;
+
+  //  Индекс активной кнопки массива среди всех сгенерированных кнопок
+
+  node.classList.remove('map__pin--active');
+  offerIndex = noticeForm.classList.getAttribute('data-index');
+  hideNode(mapGeneratedCards[offerIndex]);
+};
+
+//  Обработчкик нажатия с клавиатуры
+
+var onMapEscPress = function (evt) {
+  var mapPinActive = mapPins.querySelector('.map__pin--active');
+  if (evt.keyCode === ESC_KEYCODE && mapPinActive) {
+    diactivatePinBase(mapPinActive);
+  }
+};
+
+var onMapPinsNodeEnterPress = function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    onMapPinsNodeClick(evt);
+  }
+};
+
+var onMapCardsNodeEnterPress = function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    onMapCardsNodeClick(evt);
+  }
+};
+
+//  Обработчик кликов мышки
+
+var onMapPinMainMouseUp = function () {
+  mapElement.classList.remove('map--faded');
+  mapGeneratedPins.forEach(showNode);
+  enableNoticeForm();
+};
+
+//  Делегирование на всплытии
+
+var onMapPinsNodeClick = function (evt) {
+  // Переключить фокус, если необходимо. target - img, его родитель button
+  var target = evt.target.tagName === 'IMG' ? evt.target.parentNode : evt.target;
+  var mapPinActive = mapPins.querySelector('.map__pin--active');
+  var offerIndex;
+
+  if (target.className === 'map__pin') {
+    if (mapPinActive) {
+      diactivatePinBase(mapPinActive);
+    }
+
+    target.classList.add('map__pin--active');
+    offerIndex = [].indexOf.call(mapGeneratedPins, target);
+    showNode(mapGeneratedCards[offerIndex]);
+
+    document.addEventListener('keydown', onMapEscPress);
+  }
+};
+
+//  Делегирование на всплытии
+
+var onMapCardsNodeClick = function (evt) {
+  var target = evt.target;
+  var pinIndex;
+
+  if (target.classList.contains('popup__close')) {
+    hideNode(target.parentNode);
+    pinIndex = [].indexOf.call(mapGeneratedCards, target.parentNode);
+    mapGeneratedPins[pinIndex].classList.remove('map__pin--active');
+
+    document.removeEventListener('keydown', onMapEscPress);
+  }
+};
+
+disableNoticeForm();
+
+//  Генерация и сборка узлов
+
+mapPins = generateMapPins(NUMBER);
+mapPins.appendChild(createMapPinsNode(mapPins));
+
+// Сгенерированные кнопки (без главной)
+
+mapGeneratedPins = mapPins.querySelectorAll('.map__pin:not(.map__pin--main)');
+mapGeneratedPins.forEach(hideNode);
+
+//  Генерация предложений
+
+mapCardsNode = createMapCards(mapPins);
+mapElement.insertBefore(mapCardsNode, mapFilter);
+mapGeneratedCards = mapElement.querySelectorAll('.map__card');
+mapGeneratedCards.forEach(hideNode);
+
+//  Генерация событий
+
+similarListButtonsMain.addEventListener('mouseup', onMapPinMainMouseUp);
+
+mapPins.addEventListener('click', onMapPinsNodeClick);
+mapPins.addEventListener('keydown', onMapPinsNodeEnterPress);
+
+mapCardsNode.addEventListener('click', onMapCardsNodeClick);
+mapCardsNode.addEventListener('keydown', onMapCardsNodeEnterPress);
