@@ -64,7 +64,6 @@ var mapCardsNode;
 var noticeForm = document.querySelector('.notice__form');
 var noticeFormFieldsets = noticeForm.querySelectorAll('fieldset');
 
-
 //  Переключатели видимости узла
 
 var hideNode = function (node) {
@@ -253,6 +252,7 @@ var createMapCards = function (arrayMapPins) {
 };
 
 /*
+
 mapPins = generateMapPins(NUMBER);
 mapElement.classList.remove('map--faded');
 similarListButtons.appendChild(createMapPinsNode(mapPins));
