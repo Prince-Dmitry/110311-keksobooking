@@ -52,13 +52,10 @@ var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
 
 var fragment = document.createDocumentFragment();
-var mapPins;
 var mapElement = document.querySelector('.map');
 var similarListButtons = document.querySelector('.map .map__pins');
-var mapFilter = document.querySelector('.map .map__filters-container');
 
 var similarListButtonsMain = similarListButtons.querySelector('.map__pin--main');
-var mapCardsNode;
 
 similarListButtonsMain = document.querySelector('.notice__form');
 
@@ -242,7 +239,7 @@ function drawPins() {
 //  Функция создает фрагмент с DOM элементами шаблона (template) '.map__pin', согласно массиву объектов mapPins
 
 var createMapPinsNode = function (arrayMapPins) {
-  var fragment = document.createDocumentFragment();
+  fragment = document.createDocumentFragment();
   for (var i = 0; i < arrayMapPins.length; i++) {
     fragment.appendChild(buildMapPinNode(arrayMapPins[i]));
   }
@@ -364,18 +361,3 @@ function onPopEscPress(event) {
     document.removeEventListener('keydown', onPopEscPress);
   }
 }
-
-//  Генерация и сборка узлов
-
-mapPins = generateMapPins(NUMBER);
-mapPins.appendChild(createMapPinsNode(mapPins));
-
-// Сгенерированные кнопки (без главной)
-
-mapGeneratedPins = mapPins.querySelectorAll('.map__pin:not(.map__pin--main)');
-
-//  Генерация предложений
-
-mapCardsNode = createMapCards(mapPins);
-mapElement.insertBefore(mapCardsNode, mapFilter);
-mapGeneratedCards = mapElement.querySelectorAll('.map__card');
