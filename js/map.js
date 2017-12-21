@@ -275,10 +275,11 @@ var enableNoticeForm = function () {
 
 var getDataIndex = function () {
   for (var i = 1; i <= NUMBER; i++) {
-    noticeForm.classList.setAttribute('data-index') = i;
+    noticeForm.classList.setAttribute('data-index', i);
   }
+};
 
-}
+getDataIndex();
 
 var diactivatePinBase = function (node) {
   var offerIndex;
