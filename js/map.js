@@ -147,31 +147,31 @@ var getRandomFeatures = function () {
 //  Функция собирает объект mapPin
 //  mapPin - объект состоящий из 3-х других объектов (objAuthor, objOffer, objLocation)
 
-var getNotice = function (avatarNumber, offerTitel) {
+var getNotice = function (avatarNumber, offerTitle) {
   var objAuthor = {
-    avatar: 'img/avatars/user0' + avatarNumber.toString() + '.png'
+    'avatar': 'img/avatars/user0' + avatarNumber.toString() + '.png'
   };
   var objLocation = {
     x: getRandom(MAP_X_MIN, MAP_X_MAX),
     y: getRandom(MAP_Y_MIN, MAP_Y_MAX)
   };
   var objOffer = {
-    title: offerTitel,
-    address: objLocation.x + ', ' + objLocation.y,
-    price: getRandom(PRICE_MIN, PRICE_MAX),
-    type: TYPE[getRandom(0, TYPE.length)],
-    rooms: getRandom(OFFER_ROOM_MIN, OFFER_ROOM_MAX),
-    guests: getRandom(OFFER_GUESTS_MIN, OFFER_GUESTS_MAX),
-    checkin: CHECK[getRandom(0, CHECK.length)],
-    checkout: CHECK[getRandom(0, CHECK.length)],
-    features: getRandomFeatures(),
-    description: [],
-    photos: []
+    'title': offerTitle,
+    'address': objLocation.x + ', ' + objLocation.y,
+    'price': getRandom(PRICE_MIN, PRICE_MAX),
+    'type': TYPE[getRandom(0, TYPE.length)],
+    'rooms': getRandom(OFFER_ROOM_MIN, OFFER_ROOM_MAX),
+    'guests': getRandom(OFFER_GUESTS_MIN, OFFER_GUESTS_MAX),
+    'checkin': CHECK[getRandom(0, CHECK.length)],
+    'checkout': CHECK[getRandom(0, CHECK.length)],
+    'features': getRandomFeatures(),
+    'description': [],
+    'photos': []
   };
   var mapPin = {
-    author: objAuthor,
-    offer: objOffer,
-    location: objLocation
+    'author': objAuthor,
+    'offer': objOffer,
+    'location': objLocation
   };
 
   return mapPin;
@@ -297,6 +297,14 @@ var enableNoticeForm = function () {
   }
 };
 
+var getDataIndex = function (howMany) {
+  for (var i = 1; i <= howMany; i++) {
+    noticeForm.classList.setAttribute('data-index', i);
+  }
+};
+
+getDataIndex(NUMBER);
+
 
 var diactivatePinBase = function (node) {
   var offerIndex;
@@ -304,7 +312,7 @@ var diactivatePinBase = function (node) {
   //  Индекс активной кнопки массива среди всех сгенерированных кнопок
 
   node.classList.remove('map__pin--active');
-  offerIndex = [].indexOf.call(mapGeneratedPins, node);
+  offerIndex = noticeForm.classList.getAttribute('data-index');
   hideNode(mapGeneratedCards[offerIndex]);
 };
 
@@ -402,6 +410,10 @@ mapPins.addEventListener('keydown', onMapPinsNodeEnterPress);
 
 mapCardsNode.addEventListener('click', onMapCardsNodeClick);
 mapCardsNode.addEventListener('keydown', onMapCardsNodeEnterPress);
+
+
+
+
 
 
 var initInputsSelectsAttributes = function () {
