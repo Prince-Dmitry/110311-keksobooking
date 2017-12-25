@@ -354,8 +354,8 @@ var clearPin = function () {
 
 var openCard = function (index) {
   clearPin();
-  mapElement.insertBefore(createMapCards(mapPins), mapFilter);
   pinElements[index].classList.add('map__pin--active');
+  mapElement.insertBefore(createMapCards(mapPins), mapFilter);
   buildMapCard(index);
   card.classList.remove('hidden');
   document.addEventListener('keydown', onEscPress);
