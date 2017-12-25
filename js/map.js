@@ -258,7 +258,7 @@ var createMapCards = function (arrayMapPins) {
 
 mapPins = generateMapPins(NUMBER);
 similarListButtons.appendChild(createMapPinsNode(mapPins));
-mapElement.insertBefore(createMapCards(mapPins), mapFilter);
+
 
 var disableFields = function () {
   for (var i = 0; i < noticeFormFieldsetElements.length; i++) {
@@ -354,6 +354,7 @@ var clearPin = function () {
 
 var openCard = function (index) {
   clearPin();
+  mapElement.insertBefore(createMapCards(mapPins), mapFilter);
   pinElements[index].classList.add('map__pin--active');
   buildMapCard(index);
   card.classList.remove('hidden');
