@@ -256,6 +256,10 @@ var createMapCards = function (arrayMapPins) {
   return divNode;
 };
 
+mapPins = generateMapPins(NUMBER);
+similarListButtons.appendChild(createMapPinsNode(mapPins));
+mapElement.insertBefore(createMapCards(mapPins), mapFilter);
+
 var disableFields = function () {
   for (var i = 0; i < noticeFormFieldsetElements.length; i++) {
     noticeFormFieldsetElements[i].disabled = true;
@@ -393,7 +397,3 @@ for (var e = 0; e < pinElements.length; e++) {
 
 cardsClose.addEventListener('click', closeCard);
 cardsClose.addEventListener('keydown', onCloseEnterPress);
-
-mapPins = generateMapPins(NUMBER);
-similarListButtons.appendChild(createMapPinsNode(mapPins));
-mapElement.insertBefore(createMapCards(mapPins), mapFilter);
