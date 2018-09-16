@@ -60,8 +60,8 @@ var noticeFormFieldsetElements = noticeFormElement.querySelectorAll('fieldset');
 var mapFilters = mapElement.querySelector('.map__filters-container');
 var mapPinsListElement = document.querySelector('.map__pins');
 
-var getRandom = function (startIndex, endIndex) {
-  return Math.floor(Math.random() * (endIndex - (startIndex)) + startIndex);
+var getRandom = function (min, max) {
+  return Math.floor(Math.random() * (max - (min)) + min);
 };
 
 //  Функция случайным образом сравнивает поступающие данные
