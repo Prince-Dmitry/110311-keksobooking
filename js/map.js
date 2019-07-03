@@ -76,11 +76,11 @@ var getRandomArr = function (count) {
 
 var generateTitlesArray = function (count) {
   var arr = getRandomArr(count);
-  var arrTitels = [];
+  var arrTitles = [];
   for (var i = 0; i < count; i++) {
-    arrTitels[arr[i]] = TITLES[i];
+    arrTitles[arr[i]] = TITLES[i];
   }
-  return arrTitels;
+  return arrTitles;
 };
 
 //  Случайный массив строк случайной длины (features)
